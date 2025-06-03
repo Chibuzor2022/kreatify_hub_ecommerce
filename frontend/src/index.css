@@ -1,0 +1,33 @@
+/* index.css */
+:root {
+  --primary-color: #3498db;
+}
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* button {
+  background-color: var(--primary-color);
+} */
+
+
+
+
+
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loader {
+  animation: spin 1s linear infinite;
+  border-top-color: #3490dc;
+}
