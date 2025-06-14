@@ -12,7 +12,6 @@ const seedProducts = async () => {
     // Clear collections
     await Product.deleteMany();
 
-    // Get the admin user (assumes one exists)
     const adminUser = await User.findOne({ isAdmin: true });
     if (!adminUser) {
       throw new Error('Admin user not found. Please seed users first.');

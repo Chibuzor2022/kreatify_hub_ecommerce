@@ -30,8 +30,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
 	const product = await Product.findById(req.params.id);
 
 	if (product) {
-		await product.remove();
-		res.json({ message: "Product removed" });
+		await Product.deleteOne({ _id: product._id });
+		// res.json({ message: 'Product removed' });
+		res.status(200).json({ message: "Product deleted" });
 	} else {
 		res.status(404);
 		throw new Error("Product not found");
@@ -53,7 +54,6 @@ const createProduct = asyncHandler(async (req, res) => {
 		numReviews: 0,
 		description: "Sample description",
 	});
-
 	const createdProduct = await product.save();
 	res.status(201).json(createdProduct);
 });
@@ -61,6 +61,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @desc    Update a product
 // @route   PUT /api/products/:id
 // @access  Private/Admin
+
 const updateProduct = asyncHandler(async (req, res) => {
 	const { name, price, description, image, brand, category, countInStock } =
 		req.body;

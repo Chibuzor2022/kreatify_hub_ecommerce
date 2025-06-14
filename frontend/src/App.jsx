@@ -15,6 +15,8 @@ import './App.css'
 import CartPage from './pages/CartPage';
 import PlaceOrderPage from './pages/PlaceOrderPage'
 import UserListPage from './pages/admin/UserListPage';
+import ProductListPage from './pages/admin/ProductListPage';
+import ProductEditPage from './pages/admin/ProductEditPage';
 
 
 
@@ -26,9 +28,7 @@ function App() {
 <ToastContainer position="top-center" autoClose={3000} />
       <div className="min-h-screen flex flex-col justify-between">
         <Header/>
-<main className="flex-grow">
-        
-       
+        <main className="flex-grow">
          <Routes>
             {/* unprocted routes */}
         <Route path="/" element={<Home />} />
@@ -44,6 +44,8 @@ function App() {
             {/* Admin routes (protected) */}
        <Route path="/admin/dashboard"  element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>}/>
        <Route path="/admin/userlist"  element={<ProtectedAdminRoute><UserListPage /></ProtectedAdminRoute>}/>
+       <Route path="/admin/productlist"  element={<ProtectedAdminRoute><ProductListPage /></ProtectedAdminRoute>}/>
+       <Route path="/admin/product/:id/edit"  element={<ProtectedAdminRoute><ProductEditPage /></ProtectedAdminRoute>}/>
           </Routes>
           
            </main>

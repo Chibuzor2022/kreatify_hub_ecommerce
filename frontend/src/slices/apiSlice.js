@@ -1,10 +1,20 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+// import axiosBaseQuery from "../utils/axiosBaseQuery";
+
+// export const apiSlice = createApi({
+// 	reducerPath: "api",
+// 	baseQuery: axiosBaseQuery({ baseUrl: "" }),
+// 	tagTypes: ["User", "Users", "Product", "Order"],
+// 	endpoints: (builder) => ({}), // endpoints injected later
+// });
+
+
+import axiosBaseQuery from '../utils/axiosBaseQuery';
 
 export const apiSlice = createApi({
-	reducerPath: "api",
-	baseQuery: fetchBaseQuery({ baseUrl: "/api" }), // adjust as needed
-	tagTypes: ["User", "Users", "Product", "Order"],
-	credentials: "include",
-
-	endpoints: (builder) => ({}), // empty for now, extended later
+  baseQuery: axiosBaseQuery({
+    baseUrl: '', // Empty because axiosInstance already has baseURL
+  }),
+  tagTypes: ['Product', 'User', 'Order'],
+  endpoints: () => ({}),
 });

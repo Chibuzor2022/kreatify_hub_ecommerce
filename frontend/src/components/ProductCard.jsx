@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
           className="w-full h-48 object-cover rounded-xl mb-4"
         />
         <h2 className="text-lg font-semibold truncate">{product.name}</h2>
-        <p className="text-gray-500">${product.price.toFixed(2)}</p>
+        <p className="text-gray-500">₦{product.price.toFixed(2)}</p>
       </Link>
     </div>
   );

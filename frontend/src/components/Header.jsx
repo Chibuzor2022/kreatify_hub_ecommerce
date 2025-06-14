@@ -143,11 +143,11 @@ import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { logout} from '../slices/authSlice';
 import { clearCart } from '../slices/cartSlice';
 import SearchBox from './SearchBox';
-import logo from '../assets/logo.png';
 import axios from '../utils/axios'; 
 import { toast } from 'react-toastify';
 import UserDropdown from "./UserDropdown";
 import AdminDropdown from "./AdminDropdown";
+import SliderNav from './SliderNav';
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -175,15 +175,20 @@ const Header = () => {
   );
 
   return (
-    <header className="text-black shadow-md ">
+    <>
+    <SliderNav/>
+     <header className="bg-gray-900 text-white shadow-md">
       <div className="container mx-auto px-4 flex items-center justify-between py-4 flex-wrap">
-        <Link to="/" className="flex items-center gap-2 text-black font-bold text-xl">
+        <Link to="/" className="flex items-center gap-2 text-white font-bold text-xl">
           {/* <img src={logo} alt="kreatify" className="w-10 h-10" /> */}
           Kreatify Hub
         </Link>
 
         <div className="flex items-center space-x-6 mt-4 md:mt-0">
           <SearchBox />
+            <Link to={"/products"} >Products</Link>
+            <Link to={"/AboutUs"} >About Us</Link>
+            <Link to={"/ContactUs"}>Contact Us</Link>
 
           <Link to="/cart" className="relative flex items-center  gap-1 hover:text-green-400">
             <FaShoppingCart />
@@ -199,7 +204,7 @@ const Header = () => {
         {user ? (
   <UserDropdown name={user.name} onLogout={handleLogout} />
 ) : (
-  <Link to="/login" className="relative flex items-center text-black  gap-1 hover:text-green-400">
+  <Link to="/login" className="relative flex items-center text-white gap-1 hover:text-green-400">
     <FaUser />
     Sign In/Sign Up
   </Link>
@@ -208,7 +213,8 @@ const Header = () => {
           {user?.isAdmin && <AdminDropdown />}
         </div>
       </div>
-    </header>
+      </header>
+      </>
   );
 };
 
