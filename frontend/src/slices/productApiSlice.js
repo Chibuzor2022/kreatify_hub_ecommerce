@@ -7,6 +7,19 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			providesTags: ["Product"],
 		}),
 
+		 // Search products
+    searchProducts: builder.query({
+      query: (keyword) => ({
+        url: "/products/search",
+        method: "GET",
+        params: { keyword },
+      }),
+      providesTags: (result, error, keyword) => [
+        { type: "Product", keyword },
+      ],
+      transformResponse: (response) => response, // Optional: transform the response if needed
+    }),
+
 		// Fetch single product details
 		getProductById: builder.query({
 			query: (id) => ({ url: `/products/${id}`, method: "GET" }),
@@ -14,10 +27,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		// Create a new product
-		// createProduct: builder.mutation({
-		// 	query: () => ({ url: "/products", method: "POST" }),
-		// 	invalidatesTags: ["Product"],
-		// }),
 		createProduct: builder.mutation({
 			query: (newProduct) => ({
 				url: "/products",
@@ -31,29 +40,15 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 			invalidatesTags: ["Product"],
 		}),
 
-		// Update an existing product
-		// updateProduct: builder.mutation({
-		// 	query: ({ id, ...data }) => ({
-		// 		url: `/products/${id}`,
-		// 		method: "PUT",
-		// 		data,
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 		credentials: "include", // If using cookies for auth
-		// 	}),
-		// }),
-		updateProduct: builder.mutation({
-  query: ({ id, ...data }) => ({
-    url: `/products/${id}`,
-    method: 'PUT',
-    data,
-  }),
-  invalidatesTags: (result, error, { id }) => [
-    { type: 'Product', id },
-    { type: 'Product' }, // Also invalidate the list
-  ],
-}),
+ updateProduct: builder.mutation({
+      query: ({ id, ...productData }) => ({
+        url: `/products/${id}`,
+        method: 'PUT',
+        data: productData, // this will hit axios's 'data'
+      }),
+      invalidatesTags: ['Products'],
+    }),
+
 
 
 		// Delete a product
@@ -66,6 +61,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useGetProductsQuery,
+	useSearchProductsQuery,
 	useGetProductByIdQuery,
 	useCreateProductMutation,
 	useUpdateProductMutation,

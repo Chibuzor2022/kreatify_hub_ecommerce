@@ -5,8 +5,8 @@ const ProductCard = ({ product }) => {
     <div className="border rounded-2xl p-4 shadow hover:shadow-lg transition">
       <Link to={`/product/${product._id}`}>
         <img
-          src={product.image}
-          alt={product.name}
+          src={product.images?.[0] || product.image}
+  alt={product.name}
           className="w-full h-48 object-cover rounded-xl mb-4"
         />
         <h2 className="text-lg font-semibold truncate">{product.name}</h2>

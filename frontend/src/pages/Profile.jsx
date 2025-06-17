@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../slices/authSlice";
 import { toast } from "react-toastify";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.auth);
+   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,9 +20,10 @@ export default function Profile() {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setPhone(user.phone)
+      setPhone(user.phone);
+      navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const submitHandler = async (e) => {
   e.preventDefault();

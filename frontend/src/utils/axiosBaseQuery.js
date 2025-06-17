@@ -1,46 +1,35 @@
-import axiosInstance from "../utils/axios";
 
-// const axiosBaseQuery =
-// 	({ baseUrl } = { baseUrl: "" }) =>
-// 	async ({ url, method, data, params }) => {
-// 		try {
-// 			const result = await axiosInstance({
-// 				url: baseUrl + url,
-// 				method,
-// 				data,
-// 				params,
-// 			});
-// 			return { data: result.data };
-// 		} catch (axiosError) {
-// 			return {
-// 				error: {
-// 					status: axiosError.response?.status,
-// 					data: axiosError.response?.data || axiosError.message,
-// 				},
-// 			};
-// 		}
-// 	};
+import axios from 'axios';
 
-export const axiosBaseQuery =
-	({ baseUrl }) =>
-	async ({ url, method, data, params }) => {
-		return axiosInstance({
-			url: baseUrl + url,
-			method,
-			data, // <-- this is crucial
-			params,
-			headers: {
-				"Content-Type": "application/json",
-			},
-			withCredentials: true,
-		})
-			.then((res) => ({ data: res.data }))
-			.catch((err) => ({
-				error: {
-					status: err.response?.status,
-					data: err.response?.data || err.message,
-				},
-			}));
-	};
+const axiosBaseQuery =
+  ({ baseUrl = '' } = {}) =>
+  async ({ url, method, data, params }) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('user'))?.token;
+
+      const result = await axios({
+        url: baseUrl + url,
+        method,
+        data, 
+        params,
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+      });
+
+      return { data: result.data };
+    } catch (err) {
+      return {
+        error: {
+          status: err.response?.status || 500,
+          // data: err.response?.data || err.message,
+          data: err.response?.data || { message: err.message },
+
+        },
+      };
+    }
+  };
 
 export default axiosBaseQuery;

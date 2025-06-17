@@ -1,18 +1,20 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+console.log('✅ CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
+
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-import paystackRoutes from "./routes/paystack.js";
+import paystackRoutes from "./routes/paystackRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import uploadRoutes from './routes/uploadRoutes.js';
+import uploadRoutes from './routes/uploadRoute.js';
 
 
 
-// Load environment variables
-dotenv.config();
+const router = express.Router();
 
 // Connect to MongoDB
 connectDB();
@@ -41,10 +43,10 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/api/paystack', paystackRoutes);
 app.use("/api/users", userRoutes); //
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/paystack", paystackRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // Health check route

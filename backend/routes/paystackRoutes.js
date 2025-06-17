@@ -1,6 +1,8 @@
 // routes/paystack.js
 import express from "express";
 import axios from "axios";
+// import bodyParser from 'body-parser';
+// import { handlePaystackWebhook } from '../controllers/paystackController.js'
 
 const router = express.Router();
 
@@ -70,5 +72,11 @@ router.get("/verify/:reference", async (req, res) => {
 		return res.status(500).json({ message: "Failed to verify transaction" });
 	}
 });
+
+// router.post(
+//   '/webhook',
+//   bodyParser.raw({ type: 'application/json' }),
+//   handlePaystackWebhook
+// );
 
 export default router;

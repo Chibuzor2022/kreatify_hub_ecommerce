@@ -12,14 +12,15 @@ const productSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		image: {
+images: {
+  type: [String],
+  default: [],
+},
+  	brand: {
 			type: String,
 			required: true,
 		},
-		brand: {
-			type: String,
-			required: true,
-		},
+
 		category: {
 			type: String,
 			required: true,
@@ -33,11 +34,7 @@ const productSchema = mongoose.Schema(
 			required: true,
 			default: 0,
 		},
-		numReviews: {
-			type: Number,
-			required: true,
-			default: 0,
-		},
+	
 		price: {
 			type: Number,
 			required: true,

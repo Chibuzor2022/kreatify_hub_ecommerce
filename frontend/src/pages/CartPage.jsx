@@ -57,7 +57,7 @@ const CartPage = () => {
               {cartItems.map((item) => (
                 <tr key={item._id} className="border-b">
                   <td className="px-4 py-4 flex items-center gap-4">
-                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
+                  <img src={item.images[0]} alt={item.name} className="w-16 h-16 object-cover rounded" />
                     <Link to={`/product/${item._id}`} className="font-medium text-blue-700 hover:underline">
                       {item.name}
                     </Link>

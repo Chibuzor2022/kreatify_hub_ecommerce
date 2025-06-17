@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
+import ProductImageCarousel from '../components/ProductImageCarousel';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -66,11 +67,12 @@ const handleDecrement = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex flex-col md:flex-row gap-6">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full md:w-1/2 object-cover rounded"
-        />
+
+
+
+      <ProductImageCarousel images={product.images.length > 0 ? product.images : [product.image]} />
+
+
         <div className="flex-1 mt-19">
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
           <p className="text-gray-700 mb-4">{product.description}</p>

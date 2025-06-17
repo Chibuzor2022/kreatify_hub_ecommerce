@@ -11,6 +11,9 @@ import ProductDetails from './pages/ProductDetails';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 import './App.css'
 import CartPage from './pages/CartPage';
 import PlaceOrderPage from './pages/PlaceOrderPage'
@@ -35,8 +38,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/search/:keyword" element={<Home/> } />
             
-            {/* protected routes*/}
+            {/*Other protected routes*/}
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
         <Route path="placeorder" element={<ProtectedRoute><PlaceOrderPage /></ProtectedRoute>} />

@@ -19,8 +19,7 @@ const ProductEditPage = () => {
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
-  // const [imagePreview, setImagePreview] = useState('');
-// const [uploading, setUploading] = useState(false);
+ 
 
 
   const {
@@ -40,7 +39,6 @@ const ProductEditPage = () => {
         id: productId,
         name,
         price,
-        image: images[0] || '',
         images,
         brand,
         category,
@@ -55,6 +53,7 @@ const ProductEditPage = () => {
     }
   };
 
+
   useEffect(() => {
     if (product) {
       setName(product.name);
@@ -63,7 +62,9 @@ const ProductEditPage = () => {
       setCategory(product.category);
       setCountInStock(product.countInStock);
       setDescription(product.description);
-       setImages(product.image ? [product.image] : []);
+      setImages(product.images || []);
+
+
     }
   }, [product]);
 
@@ -162,3 +163,4 @@ const ProductEditPage = () => {
 };
 
 export default ProductEditPage;
+

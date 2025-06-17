@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:5000/api
+@productId = 684e3d5de29ff63930e6d58d
+@token = YOUR_JWT_TOKEN_HERE
+
+### 1. Login to get token
+POST {{baseUrl}}/users/login
+Content-Type: application/json
+
+{
+  "email": "goodman@yahoo.com",
+  "password": "ekude123456"
+}
+
+### 2. Get product details
+GET {{baseUrl}}/products/{{productId}}
+Authorization: Bearer {{token}}
+
+### 3. Update product (PUT)
+PUT {{baseUrl}}/products/{{productId}}
+
+
+### 4. Verify update
+GET {{baseUrl}}/products/{{productId}}
+
+### 4. search product
+GET {{baseUrl}}/products/search?keyword=building

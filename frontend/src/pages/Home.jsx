@@ -14,7 +14,9 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get("/api/products");
+        // const { data } = await axios.get("/api/products");
+        const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/products`);
         setProducts(data);
         setError("");
       } catch (err) {
