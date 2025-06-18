@@ -36,6 +36,14 @@ const UserDropdown = ({ name, onLogout }) => {
                 Profile
               </Link>
             </MenuItem>
+             <MenuItem>
+              <Link
+                to="/profile"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 data-[headlessui-state=active]:bg-gray-100 data-[headlessui-state=active]:text-gray-900"
+              >
+                Order History
+              </Link>
+            </MenuItem>
             <MenuItem>
               <button
                 onClick={onLogout}

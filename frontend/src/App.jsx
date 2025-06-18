@@ -20,8 +20,9 @@ import PlaceOrderPage from './pages/PlaceOrderPage'
 import UserListPage from './pages/admin/UserListPage';
 import ProductListPage from './pages/admin/ProductListPage';
 import ProductEditPage from './pages/admin/ProductEditPage';
-
-
+import ShippingPage from './pages/shippingPage';
+import AboutPage from './pages/AboutPage';
+import AllProductsPage from './pages/AllProductsPage';
 
 
 
@@ -35,14 +36,18 @@ function App() {
          <Routes>
             {/* unprocted routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/allproducts" element={<AllProductsPage />} />
+
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/search/:keyword" element={<Home/> } />
             
             {/*Other protected routes*/}
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+        <Route path="/shipping" element={<ProtectedRoute><ShippingPage /></ProtectedRoute>} />
         <Route path="placeorder" element={<ProtectedRoute><PlaceOrderPage /></ProtectedRoute>} />
             
             {/* Admin routes (protected) */}

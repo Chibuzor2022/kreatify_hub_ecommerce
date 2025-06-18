@@ -23,7 +23,7 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    navigate('/login?redirect=/placeorder');
+    navigate('/login?redirect=/shipping');
   };
 
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -109,7 +109,7 @@ const CartPage = () => {
           <span>Total Price:</span>
           <span className="font-bold">₦{totalPrice.toFixed(2)}</span>
         </div>
-        <Link to={'/placeorder'}>
+        <Link to={'/shipping'}>
         
       
         <button

@@ -57,9 +57,8 @@ const Header = () => {
 
           </div>
          
-            <Link to={"/products"} >Products</Link>
-            <Link to={"/AboutUs"} >About Us</Link>
-            <Link to={"/ContactUs"}>Contact Us</Link>
+            <Link to={"/allproducts"} >Products</Link>
+            <Link to={"/about"} >About Us</Link>
 
           <Link to="/cart" className="relative flex items-center  gap-1 hover:text-green-400">
             <FaShoppingCart />

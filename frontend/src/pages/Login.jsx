@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../slices/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
+import { clearCart} from '../slices/cartSlice';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,9 +15,10 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
+      dispatch(clearCart());
       navigate('/');
     }
-  }, [user, navigate]);
+  }, [user, navigate, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();

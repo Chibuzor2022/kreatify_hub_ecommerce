@@ -21,6 +21,7 @@ const ShippingPage = () => {
         city,
         postalCode,
         country,
+        phone, // ✅ Included phone here
       })
     );
     navigate('/placeorder');
@@ -62,9 +63,9 @@ const ShippingPage = () => {
           onChange={(e) => setCountry(e.target.value)}
           required
         />
-          <input
+        <input
           type="text"
-          placeholder="Country"
+          placeholder="Phone Number"
           className="w-full p-2 border rounded"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}

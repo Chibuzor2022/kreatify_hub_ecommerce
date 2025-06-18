@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 import ProductImageCarousel from '../components/ProductImageCarousel';
+import { toast } from 'react-toastify'; // Make sure this is at the top
 
 function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,11 +47,12 @@ const handleDecrement = () => {
 };
 
 
-  const handleAddToCart = () => {
-    dispatch(addToCart({ ...product, quantity: Number(quantity) }));
-    navigate('/cart')
 
-  };
+const handleAddToCart = () => {
+  dispatch(addToCart({ ...product, quantity: Number(quantity) }));
+  toast.success(`${product.name} added to cart`);
+};
+
 
   if (loading) {
     return <div className="text-center mt-10">Loading...</div>;
