@@ -112,6 +112,14 @@ getProducts: builder.query({
       }),
       providesTags: (result, error, id) => [{ type: "Product", id }],
     }),
+// Get My Orders
+	getMyOrders: builder.query({
+  query: () => ({
+    url: `/orders/myorders`,
+    method: 'GET',
+    credentials: 'include', // to send cookies (for auth)
+  }),
+}),
 
     // Create a new product
     createProduct: builder.mutation({
@@ -155,4 +163,5 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetMyOrdersQuery,
 } = productsApiSlice;

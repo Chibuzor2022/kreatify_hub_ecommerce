@@ -135,11 +135,20 @@ const updateProduct = asyncHandler(async (req, res) => {
 	}
 });
 
+// @desc    Get logged in user's orders
+// @route   GET /api/orders/myorders
+// @access  Private
+const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  res.json(orders);
+});
+
 
 export {
 	getProducts,
 	searchProducts,
 	getProductById,
+	getMyOrders,
 	deleteProduct,
 	createProduct,
 	updateProduct,

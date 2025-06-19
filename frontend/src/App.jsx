@@ -23,7 +23,7 @@ import ProductEditPage from './pages/admin/ProductEditPage';
 import ShippingPage from './pages/shippingPage';
 import AboutPage from './pages/AboutPage';
 import AllProductsPage from './pages/AllProductsPage';
-
+import OrderHistoryPage from './pages/OrderHistoryPage';
 
 
 function App() {
@@ -40,7 +40,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/allproducts" element={<AllProductsPage />} />
-
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/search/:keyword" element={<Home/> } />
             
@@ -48,7 +47,9 @@ function App() {
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
         <Route path="/shipping" element={<ProtectedRoute><ShippingPage /></ProtectedRoute>} />
-        <Route path="placeorder" element={<ProtectedRoute><PlaceOrderPage /></ProtectedRoute>} />
+        <Route path="/placeorder" element={<ProtectedRoute><PlaceOrderPage /></ProtectedRoute>} />
+        <Route path="/orders" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
+        
             
             {/* Admin routes (protected) */}
        <Route path="/admin/dashboard"  element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>}/>
