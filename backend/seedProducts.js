@@ -21,7 +21,7 @@ const seedProducts = async () => {
     const products = [
       {
         name: 'Wireless Headphones',
-        image: '/images/headphones.jpg',
+        images: '/images/headphones.jpg',
         brand: 'Sony',
         category: 'Electronics',
         description: 'Noise cancelling headphones with great sound quality.',

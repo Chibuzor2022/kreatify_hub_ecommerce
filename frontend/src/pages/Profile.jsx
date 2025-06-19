@@ -1,52 +1,60 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { updateUserProfile } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const { user, loading, error } = useSelector((state) => state.auth);
-   const navigate = useNavigate();
 
+  // Get user state from Redux store
+  const { user, loading, error } = useSelector((state) => state.auth);
+
+  // Form fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate(); // Import useNavigate from react-router-dom
 
   useEffect(() => {
+    // Populate form when user data is available
     if (user) {
-      setName(user.name);
-      setEmail(user.email);
-      setPhone(user.phone);
-      navigate("/");
+      setName(user.name || '');
+      setEmail(user.email || '');
+      setPhone(user.phone || '');
     }
-  }, [user, navigate]);
+  }, [user]);
 
   const submitHandler = async (e) => {
-  e.preventDefault();
-  if (password !== confirmPassword) {
-    setMessage("Passwords do not match");
-    return;
-  }
+    e.preventDefault();
 
-  try {
-    await dispatch(updateUserProfile({ name, email, password })).unwrap();
-    toast.success("Profile updated successfully");
-  } catch (err) {
-    toast.error(err?.message || "Profile update failed");
-  }
-};
+    // Validate password match
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      return;
+    }
 
+    try {
+      await dispatch(updateUserProfile({ name, email, phone, password })).unwrap();
+      toast.success("Profile updated successfully");
+      navigate("/"); // Redirect to home page after update
+    } catch (err) {
+      toast.error(err?.message || "Profile update failed");
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
+
+      {/* Show validation message or error */}
       {message && <p className="mb-4 text-red-600">{message}</p>}
       {error && <p className="mb-4 text-red-600">{error}</p>}
       {loading && <p className="mb-4 text-blue-600">Updating...</p>}
+
       <form onSubmit={submitHandler} className="space-y-4">
         <div>
           <label className="block mb-1 font-semibold">Name</label>
@@ -68,7 +76,7 @@ export default function Profile() {
             required
           />
         </div>
-         <div>
+        <div>
           <label className="block mb-1 font-semibold">Phone</label>
           <input
             type="text"
@@ -88,7 +96,6 @@ export default function Profile() {
             placeholder="New password"
           />
         </div>
-       
         <div>
           <label className="block mb-1 font-semibold">Confirm Password</label>
           <input

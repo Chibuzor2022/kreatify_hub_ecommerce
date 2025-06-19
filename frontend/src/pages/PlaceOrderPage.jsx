@@ -335,6 +335,13 @@
 
 // export default PlaceOrderPage;
 
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -342,6 +349,7 @@ import PaystackPop from '@paystack/inline-js';
 import axios from 'axios';
 import { clearCart } from '../slices/cartSlice';
 import { toast } from 'react-toastify';
+import { apiSlice } from '../slices/apiSlice';
 
 const PlaceOrderPage = () => {
   const [loading, setLoading] = useState(false);
@@ -422,10 +430,10 @@ const PlaceOrderPage = () => {
         onSuccess: () => {
           toast.success('Payment successful!');
           dispatch(clearCart());
-          // navigate(`/order/${createdOrder._id}`);
+           dispatch(apiSlice.util.invalidateTags(['MyOrders']));
           navigate('/');
         },
-        onCancel: () => toast.info('Payment cancelled'),
+          onCancel: () => toast.info('Payment cancelled'),
       });
 
     } catch (error) {

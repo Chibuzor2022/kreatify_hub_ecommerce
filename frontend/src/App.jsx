@@ -24,8 +24,9 @@ import ShippingPage from './pages/shippingPage';
 import AboutPage from './pages/AboutPage';
 import AllProductsPage from './pages/AllProductsPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
-
-
+import OrderDetailsPage from './pages/OrderDetailsPage';
+import AllOrdersHistoryPage from './pages/admin/AllOrdersHistoryPage';
+import AdminOrderDetailsPage from './pages/admin/AdminOrderDetailsPage';
 function App() {
   return (
     <Router>
@@ -49,6 +50,8 @@ function App() {
         <Route path="/shipping" element={<ProtectedRoute><ShippingPage /></ProtectedRoute>} />
         <Route path="/placeorder" element={<ProtectedRoute><PlaceOrderPage /></ProtectedRoute>} />
         <Route path="/orders" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
+        <Route path="/order/:id" element={<ProtectedRoute><OrderDetailsPage /></ProtectedRoute>} />
+
         
             
             {/* Admin routes (protected) */}
@@ -56,6 +59,8 @@ function App() {
        <Route path="/admin/userlist"  element={<ProtectedAdminRoute><UserListPage /></ProtectedAdminRoute>}/>
        <Route path="/admin/productlist"  element={<ProtectedAdminRoute><ProductListPage /></ProtectedAdminRoute>}/>
        <Route path="/admin/product/:id/edit"  element={<ProtectedAdminRoute><ProductEditPage /></ProtectedAdminRoute>}/>
+       <Route path="/admin/orderlist"  element={<ProtectedAdminRoute><AllOrdersHistoryPage /></ProtectedAdminRoute>}/>
+       <Route path="/admin/order/:id"  element={<ProtectedAdminRoute><AdminOrderDetailsPage /></ProtectedAdminRoute>}/>
           </Routes>
           
            </main>

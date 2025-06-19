@@ -107,33 +107,69 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 
-const updateProduct = asyncHandler(async (req, res) => {
-	const { name, price, description, images, brand, category, countInStock } =
-		req.body;
+// const updateProduct = asyncHandler(async (req, res) => {
+// 	const { name, price, description, images, brand, category, countInStock } =
+// 		req.body;
 		
-	const product = await Product.findById(req.params.id);
+// 	const product = await Product.findById(req.params.id);
 
-	if (product) {
-		product.name = name;
-		product.price = price;
-		product.description = description;
-		product.images = images;
-		product.brand = brand;
-		product.category = category;
-		product.countInStock = countInStock;
+// 	if (product) {
+// 		product.name = name;
+// 		product.price = price;
+// 		product.description = description;
+// 		product.images = images;
+// 		product.brand = brand;
+// 		product.category = category;
+// 		product.countInStock = countInStock;
 
-		const updatedProduct = await product.save();
-		res.json(updatedProduct);
-		if (images && images.length > 0) {
-  product.images = images;
-  product.image = ''; // optional: clear old single image field
-}
+// 		const updatedProduct = await product.save();
+// 		res.json(updatedProduct);
+// 		if (images && images.length > 0) {
+//   product.images = images;
+//   product.image = ''; // optional: clear old single image field
+// }
 
-	} else {
-		res.status(404);
-		throw new Error("Product not found");
-	}
+// 	} else {
+// 		res.status(404);
+// 		throw new Error("Product not found");
+// 	}
+// });
+
+// @desc    Update a product
+// @route   PUT /api/products/:id
+// @access  Private/Admin
+const updateProduct = asyncHandler(async (req, res) => {
+  console.log("🧪 Incoming req.body:", req.body); 
+  const {
+    name,
+    price,
+    description,
+    images, // this should be an array
+    brand,
+    category,
+    countInStock,
+  } = req.body;
+
+  const product = await Product.findById(req.params.id);
+
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  // Update only if values are provided
+  if (name) product.name = name;
+  if (price !== undefined) product.price = price;
+  if (description) product.description = description;
+  if (images && images.length > 0) product.images = images;
+  if (brand) product.brand = brand;
+  if (category) product.category = category;
+  if (countInStock !== undefined) product.countInStock = countInStock;
+
+  const updatedProduct = await product.save();
+  res.json(updatedProduct);
 });
+
 
 // @desc    Get logged in user's orders
 // @route   GET /api/orders/myorders

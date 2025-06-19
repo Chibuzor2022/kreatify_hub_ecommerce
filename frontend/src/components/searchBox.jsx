@@ -147,7 +147,7 @@ const SearchBox = () => {
 
       {/* Search results dropdown */}
       {keyword && !isLoading && (
-        <div className="absolute z-10 mt-1 w-full bg-black border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+        <div className="p-5 absolute z-10 my-3 w-full bg-black border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
           {isError ? (
             <div className="p-3 text-red-500">Error loading results</div>
           ) : products.length > 0 ? (
@@ -159,7 +159,7 @@ const SearchBox = () => {
                 onClick={() => handleProductSelect(product._id)}
               >
                 <div className="font-medium">{product.name}</div>
-                <div className="text-sm text-white">${product.price}</div>
+                <div className="pb-3 text-sm text-white">${product.price}</div>
               </div>
             ))
           ) : (

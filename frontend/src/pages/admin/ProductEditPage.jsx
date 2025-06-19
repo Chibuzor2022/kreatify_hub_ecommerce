@@ -32,26 +32,62 @@ const ProductEditPage = () => {
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
-    const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      await updateProduct({
-        id: productId,
-        name,
-        price,
-        images,
-        brand,
-        category,
-        description,
-        countInStock,
-      }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success('Product updated');
-      // refetch();
-      navigate('/admin/productlist');
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
-    }
-  };
+  //   const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try 
+    
+  //   {
+  //     await updateProduct({
+  //       id: productId,
+  //       name,
+  //       price,
+  //       images,
+  //       brand,
+  //       category,
+  //       description,
+  //       countInStock,
+  //     }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
+  //     toast.success('Product updated');
+  //     // refetch();
+  //     navigate('/admin/productlist');
+  //   } catch (err) {
+  //     toast.error(err?.data?.message || err.error);
+  //   }
+  // };
+  const submitHandler = async (e) => {
+  e.preventDefault();
+
+  // ✅ Log the data before sending
+  console.log("📤 Sending Product Data:", {
+    id: productId,
+    name,
+    price,
+    images,
+    brand,
+    category,
+    description,
+    countInStock,
+  });
+
+  try {
+    await updateProduct({
+      id: productId,
+      name,
+      price,
+      images,
+      brand,
+      category,
+      description,
+      countInStock,
+    }).unwrap(); // NOTE: unwrap lets us catch the error
+
+    toast.success('Product updated');
+    navigate('/admin/productlist');
+  } catch (err) {
+    toast.error(err?.data?.message || err.error);
+  }
+};
+
 
 
   useEffect(() => {

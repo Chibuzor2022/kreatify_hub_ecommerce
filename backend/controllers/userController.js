@@ -24,8 +24,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 	if (user) {
 		const token = generateToken(user._id);
-		console.log("Token generated");
-
 		res.status(201).json({
 			_id: user._id,
 			name: user.name,
@@ -45,23 +43,19 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Public
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
-	console.log("Login attempt:", email);
 
 	const user = await User.findOne({ email });
 	if (!user) {
-		console.log("User not found");
 		return res.status(401).json({ message: "Invalid credentials" });
 	}
 
 	const isMatch = await user.matchPassword(password);
 
-	console.log("Password match:", isMatch);
 	if (!isMatch) {
 		return res.status(401).json({ message: "Invalid credentials" });
 	}
 
 	const token = generateToken(user._id);
-	console.log("Token generated");
 
 	res.cookie("jwt", token, {
 		httpOnly: true,

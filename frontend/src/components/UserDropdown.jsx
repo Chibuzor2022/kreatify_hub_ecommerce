@@ -29,28 +29,40 @@
 //         <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
 //           <div className="py-1">
 //             <MenuItem>
-//               <Link
-//                 to="/profile"
-//                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 data-[headlessui-state=active]:bg-gray-100 data-[headlessui-state=active]:text-gray-900"
-//               >
-//                 Profile
-//               </Link>
-//             </MenuItem>
-//              <MenuItem>
-//               <Link
-//                 to="/orders"
-//                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 data-[headlessui-state=active]:bg-gray-100 data-[headlessui-state=active]:text-gray-900"
-//               >
-//                 Order History
-//               </Link>
+//               {({ active }) => (
+//                 <Link
+//                   to="/profile"
+//                   className={`block px-4 py-2 text-sm ${
+//                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+//                   }`}
+//                 >
+//                   Profile
+//                 </Link>
+//               )}
 //             </MenuItem>
 //             <MenuItem>
-//               <button
-//                 onClick={onLogout}
-//                 className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 data-[headlessui-state=active]:bg-gray-100 data-[headlessui-state=active]:text-gray-900"
-//               >
-//                 Logout
-//               </button>
+//               {({ active }) => (
+//                 <Link
+//                   to="/orders"
+//                   className={`block px-4 py-2 text-sm ${
+//                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+//                   }`}
+//                 >
+//                   Order History
+//                 </Link>
+//               )}
+//             </MenuItem>
+//             <MenuItem>
+//               {({ active }) => (
+//                 <button
+//                   onClick={onLogout}
+//                   className={`w-full text-left block px-4 py-2 text-sm ${
+//                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+//                   }`}
+//                 >
+//                   Logout
+//                 </button>
+//               )}
 //             </MenuItem>
 //           </div>
 //         </MenuItems>
@@ -60,6 +72,7 @@
 // };
 
 // export default UserDropdown;
+
 
 import {
   Menu,
@@ -73,9 +86,6 @@ import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const UserDropdown = ({ name, onLogout }) => {
-  const baseClass =
-    'block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100';
-
   return (
     <Menu as="div" className="relative inline-block text-left">
       <MenuButton className="flex items-center gap-2 text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded">
@@ -94,16 +104,41 @@ const UserDropdown = ({ name, onLogout }) => {
       >
         <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
           <div className="py-1">
-            <MenuItem as={Link} to="/profile" className={baseClass}>
-              Profile
-            </MenuItem>
-            <MenuItem as={Link} to="/orders" className={baseClass}>
-              Order History
+            <MenuItem>
+              {({ active }) => (
+                <Link
+                  to="/profile"
+                  className={`block px-4 py-2 text-sm ${
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                  }`}
+                >
+                  Profile
+                </Link>
+              )}
             </MenuItem>
             <MenuItem>
-              <button onClick={onLogout} className={baseClass}>
-                Logout
-              </button>
+              {({ active }) => (
+                <Link
+                  to="/orders"
+                  className={`block px-4 py-2 text-sm ${
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                  }`}
+                >
+                  Order History
+                </Link>
+              )}
+            </MenuItem>
+            <MenuItem>
+              {({ active }) => (
+                <button
+                  onClick={onLogout}
+                  className={`w-full text-left block px-4 py-2 text-sm ${
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                  }`}
+                >
+                  Logout
+                </button>
+              )}
             </MenuItem>
           </div>
         </MenuItems>
