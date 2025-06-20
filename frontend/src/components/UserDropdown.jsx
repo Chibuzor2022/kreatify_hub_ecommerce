@@ -102,13 +102,13 @@ const UserDropdown = ({ name, onLogout }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-          <div className="py-1">
+        <MenuItems className="absolute right-0 mt-1 w-24 h-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+          <div className="py-1 mb-">
             <MenuItem>
               {({ active }) => (
                 <Link
                   to="/profile"
-                  className={`block px-4 py-2 text-sm ${
+                  className={`block ps-1  py-1 text-sm ${
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                   }`}
                 >
@@ -120,7 +120,7 @@ const UserDropdown = ({ name, onLogout }) => {
               {({ active }) => (
                 <Link
                   to="/orders"
-                  className={`block px-4 py-2 text-sm ${
+                  className={`block ps-1 py-1 text-sm ${
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                   }`}
                 >
@@ -132,7 +132,7 @@ const UserDropdown = ({ name, onLogout }) => {
               {({ active }) => (
                 <button
                   onClick={onLogout}
-                  className={`w-full text-left block px-4 py-2 text-sm ${
+                  className={`w-full text-left block ps-1 py-1  text-sm ${
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                   }`}
                 >
