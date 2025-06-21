@@ -1,26 +1,27 @@
+// Import required hooks and utilities
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserProfile } from "../slices/authSlice";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { updateUserProfile } from "../slices/authSlice"; // Redux action to update profile
+import { toast } from "react-toastify"; // Toast notifications
+import { useNavigate } from "react-router-dom"; // Navigation
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // Get user state from Redux store
+  // Access auth state from Redux store
   const { user, loading, error } = useSelector((state) => state.auth);
 
-  // Form fields
+  // Local component state for profile form fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
-  const navigate = useNavigate(); // Import useNavigate from react-router-dom
+  const [message, setMessage] = useState(null); // To show local validation errors
 
+  // Populate form fields with current user info on load
   useEffect(() => {
-    // Populate form when user data is available
     if (user) {
       setName(user.name || '');
       setEmail(user.email || '');
@@ -28,92 +29,112 @@ export default function Profile() {
     }
   }, [user]);
 
+  // Submit handler for the profile update form
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // Validate password match
+    // Validate passwords match
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
       return;
     }
 
     try {
+      // Dispatch the updateUserProfile action with form data
       await dispatch(updateUserProfile({ name, email, phone, password })).unwrap();
+
+      // Show success message and redirect to homepage
       toast.success("Profile updated successfully");
-      navigate("/"); // Redirect to home page after update
+      navigate("/");
     } catch (err) {
+      // Show error message if update fails
       toast.error(err?.message || "Profile update failed");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 sm:p-10">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Update Profile</h1>
 
-      {/* Show validation message or error */}
-      {message && <p className="mb-4 text-red-600">{message}</p>}
-      {error && <p className="mb-4 text-red-600">{error}</p>}
-      {loading && <p className="mb-4 text-blue-600">Updating...</p>}
+        {/* Display local or server error messages */}
+        {message && <p className="mb-4 text-sm text-red-500">{message}</p>}
+        {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
+        {loading && <p className="mb-4 text-sm text-blue-500">Updating...</p>}
 
-      <form onSubmit={submitHandler} className="space-y-4">
-        <div>
-          <label className="block mb-1 font-semibold">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-semibold">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-semibold">Phone</label>
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-            required
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-semibold">Password (leave blank to keep current)</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-            placeholder="New password"
-          />
-        </div>
-        <div>
-          <label className="block mb-1 font-semibold">Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-            placeholder="Confirm new password"
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Update Profile
-        </button>
-      </form>
+        {/* Profile Update Form */}
+        <form onSubmit={submitHandler} className="space-y-5">
+
+          {/* Full Name Input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Full Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              required
+            />
+          </div>
+
+          {/* Email Input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email Address</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              required
+            />
+          </div>
+
+          {/* Phone Input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              required
+            />
+          </div>
+
+          {/* Password Input (optional) */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">New Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Leave blank to keep current"
+              className="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+            />
+          </div>
+
+          {/* Confirm Password Input */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="mt-1 w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              placeholder="Confirm password"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            {loading ? 'Updating...' : 'Update Profile'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

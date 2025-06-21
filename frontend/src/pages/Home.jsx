@@ -42,7 +42,9 @@ const Home = () => {
     <>
       <HeroSection />
       <div className="px-4 py-6 max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Product List</h1>
+<h1 className="text-3xl font-bold mb-6 flex items-center justify-center gap-2 underline underline-offset-4 decoration-green-400 decoration-4">
+  Product List
+</h1>
 
         {loading ? (
           <Loader />

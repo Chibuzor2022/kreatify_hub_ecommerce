@@ -1,53 +1,4 @@
-// import React, { useState } from 'react';
-// import { useNavigate, useParams } from 'react-router-dom';
-
-// const SearchBox = () => {
-//   const navigate = useNavigate();
-//   const { keyword: urlKeyword } = useParams();
-
-//   // Set initial keyword from URL param or empty string
-//   const [keyword, setKeyword] = useState(urlKeyword || '');
-
-//   // Handle search submission
-//   const submitHandler = (e) => {
-//     e.preventDefault();
-//     if (keyword.trim()) {
-//       navigate(`/search/${keyword.trim()}`);
-//       setKeyword('');
-//     } else {
-//       navigate('/');
-//     }
-//   };
-
-//   return (
-//     <form
-//       onSubmit={submitHandler}
-//       className="flex items-center space-x-2 ml-4"
-//     >
-//       {/* Search Input */}
-//       <input
-//         type="text"
-//         name="q"
-//         value={keyword}
-//         onChange={(e) => setKeyword(e.target.value)}
-//         placeholder="Search Products..."
-//         className="px-3 py-2 rounded-md text-sm text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-//       />
-
-//       {/* Submit Button */}
-//       <button
-//         type="submit"
-//         className="bg-transparent border border-white text-white px-3 py-2 rounded-md hover:bg-white hover:text-black transition"
-//       >
-//         Search
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default SearchBox;
-
-// components/SearchBox.jsx
+// 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearchProductsQuery } from '../slices/productApiSlice';
@@ -57,24 +8,25 @@ const SearchBox = () => {
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
   const navigate = useNavigate();
 
-  // Using the search query from productApiSlice
+  // Fetch products based on debounced keyword
   const { 
     data: products = [], 
     isLoading, 
     isError 
   } = useSearchProductsQuery(debouncedKeyword, {
-    skip: debouncedKeyword.trim().length < 2, // Only search when 2+ characters
+    skip: debouncedKeyword.trim().length < 2, // Skip query if less than 2 characters
   });
 
-  // Debounce the search input
+  // Debounce input to limit API requests
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedKeyword(keyword);
-    }, 500);
+    }, 500); // Wait 500ms before setting debounced keyword
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); // Clear timer on cleanup
   }, [keyword]);
 
+  // Navigate to search results page on submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
@@ -82,9 +34,10 @@ const SearchBox = () => {
     }
   };
 
+  // Navigate to selected product detail page
   const handleProductSelect = (productId) => {
     navigate(`/product/${productId}`);
-    setKeyword('');
+    setKeyword(''); // Clear search input
   };
 
   return (
@@ -94,17 +47,18 @@ const SearchBox = () => {
           <input
             type="text"
             value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            onChange={(e) => setKeyword(e.target.value)} // Update input value
             placeholder="Search products..."
             className="w-full px-4 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            disabled={isLoading}
+            disabled={isLoading} // Disable input while loading
           />
           <button
             type="submit"
             className="absolute right-2 top-1/2 transform -translate-y-1/2"
-            disabled={isLoading}
+            disabled={isLoading} // Disable button while loading
           >
             {isLoading ? (
+              // Spinner while loading
               <svg
                 className="animate-spin h-5 w-5 text-black"
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,6 +80,7 @@ const SearchBox = () => {
                 ></path>
               </svg>
             ) : (
+              // Search icon
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-gray-500"
@@ -151,10 +106,10 @@ const SearchBox = () => {
           {isError ? (
             <div className="p-3 text-red-500">Error loading results</div>
           ) : products.length > 0 ? (
+            // Display product suggestions
             products.map((product) => (
               <div
                 key={product._id}
-                // className="p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
                 className="cursor-pointer"
                 onClick={() => handleProductSelect(product._id)}
               >

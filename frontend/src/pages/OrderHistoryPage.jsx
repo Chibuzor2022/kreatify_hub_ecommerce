@@ -7,18 +7,21 @@ import ErrorMessage from "../components/ErrorMessage";
 
 const OrderHistoryPage = () => {
   const navigate = useNavigate();
+
+  // Get the authenticated user from Redux store
   const { user } = useSelector((state) => state.auth);
 
+  // Fetch user's orders with auto-refetching every 30 seconds
   const {
-    data: orders = [],
+    data: orders = [], // fallback to empty array if no data
     isLoading,
     error,
-    // refetch,
   } = useGetMyOrdersQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
 
+  // Redirect to login if user is not authenticated
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -27,17 +30,18 @@ const OrderHistoryPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Order History</h1>
-       
       </div>
 
+      {/* Loading, Error, or Orders Display */}
       {isLoading ? (
-        <Loader />
+        <Loader /> // Show loader if data is being fetched
       ) : error ? (
-        <ErrorMessage message={error?.data?.message || error?.message} />
+        <ErrorMessage message={error?.data?.message || error?.message} /> // Show error message if request fails
       ) : orders.length === 0 ? (
-        <p>No orders found.</p>
+        <p>No orders found.</p> // Handle empty orders
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full border text-sm">
@@ -53,11 +57,13 @@ const OrderHistoryPage = () => {
             </thead>
             <tbody>
               {orders.map((order) => {
-                const firstItem = order.orderItems?.[0]; // Use first product in the order
+                const firstItem = order.orderItems?.[0]; // Use the first product in the order for display
                 return (
                   <tr key={order._id} className="border-t hover:bg-gray-50">
+                    {/* Order ID */}
                     <td className="p-3 border">{order._id}</td>
 
+                    {/* Product image (first item in the order) */}
                     <td className="p-3 border">
                       {firstItem ? (
                         <img
@@ -70,6 +76,7 @@ const OrderHistoryPage = () => {
                       )}
                     </td>
 
+                    {/* Product name (first item) + count of additional items */}
                     <td className="p-3 border">
                       {firstItem?.name || "No Product"}
                       {order.orderItems.length > 1 && (
@@ -80,8 +87,13 @@ const OrderHistoryPage = () => {
                       )}
                     </td>
 
+                    {/* Order date */}
                     <td className="p-3 border">{order.createdAt.substring(0, 10)}</td>
+
+                    {/* Total price */}
                     <td className="p-3 border">₦{order.totalPrice.toLocaleString()}</td>
+
+                    {/* View order button */}
                     <td className="p-3 border">
                       <button
                         onClick={() => navigate(`/order/${order._id}`)}
@@ -102,7 +114,3 @@ const OrderHistoryPage = () => {
 };
 
 export default OrderHistoryPage;
-
-
-
-

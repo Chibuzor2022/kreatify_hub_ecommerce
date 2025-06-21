@@ -73,10 +73,4 @@ router.get("/verify/:reference", async (req, res) => {
 	}
 });
 
-// router.post(
-//   '/webhook',
-//   bodyParser.raw({ type: 'application/json' }),
-//   handlePaystackWebhook
-// );
-
 export default router;

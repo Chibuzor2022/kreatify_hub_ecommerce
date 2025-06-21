@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -5,13 +6,13 @@ import {
   useGetProductByIdQuery,
   useUpdateProductMutation,
 } from '../../slices/productApiSlice';
-import ImageUploader from '../../components/ImageUploader'; // adjust the path if needed
-
+import ImageUploader from '../../components/ImageUploader'; // Component for handling image uploads
 
 const ProductEditPage = () => {
-  const { id: productId } = useParams();
+  const { id: productId } = useParams(); // Extract product ID from URL
   const navigate = useNavigate();
 
+  // Local state for form fields
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [images, setImages] = useState([]);
@@ -19,58 +20,24 @@ const ProductEditPage = () => {
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState('');
- 
 
-
+  // Fetch product details by ID
   const {
     data: product,
     isLoading,
-    // refetch,
     error,
   } = useGetProductByIdQuery(productId);
 
+  // Mutation hook for updating product
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
-  //   const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   try 
-    
-  //   {
-  //     await updateProduct({
-  //       id: productId,
-  //       name,
-  //       price,
-  //       images,
-  //       brand,
-  //       category,
-  //       description,
-  //       countInStock,
-  //     }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-  //     toast.success('Product updated');
-  //     // refetch();
-  //     navigate('/admin/productlist');
-  //   } catch (err) {
-  //     toast.error(err?.data?.message || err.error);
-  //   }
-  // };
+  // Handle form submission
   const submitHandler = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  // ✅ Log the data before sending
-  console.log("📤 Sending Product Data:", {
-    id: productId,
-    name,
-    price,
-    images,
-    brand,
-    category,
-    description,
-    countInStock,
-  });
-
-  try {
-    await updateProduct({
+    // Log product data for debugging
+    console.log("📤 Sending Product Data:", {
       id: productId,
       name,
       price,
@@ -79,17 +46,29 @@ const ProductEditPage = () => {
       category,
       description,
       countInStock,
-    }).unwrap(); // NOTE: unwrap lets us catch the error
+    });
 
-    toast.success('Product updated');
-    navigate('/admin/productlist');
-  } catch (err) {
-    toast.error(err?.data?.message || err.error);
-  }
-};
+    try {
+      // Send update request to server
+      await updateProduct({
+        id: productId,
+        name,
+        price,
+        images,
+        brand,
+        category,
+        description,
+        countInStock,
+      }).unwrap();
 
+      toast.success('Product updated');
+      navigate('/admin/productlist');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
 
-
+  // Populate form fields when product is loaded
   useEffect(() => {
     if (product) {
       setName(product.name);
@@ -99,8 +78,6 @@ const ProductEditPage = () => {
       setCountInStock(product.countInStock);
       setDescription(product.description);
       setImages(product.images || []);
-
-
     }
   }, [product]);
 
@@ -114,6 +91,7 @@ const ProductEditPage = () => {
         <div className="text-center text-red-600">Failed to load product</div>
       ) : (
         <form onSubmit={submitHandler} className="space-y-4">
+          {/* Product Name */}
           <div>
             <label className="block text-sm font-medium">Name</label>
             <input
@@ -125,6 +103,7 @@ const ProductEditPage = () => {
             />
           </div>
 
+          {/* Price */}
           <div>
             <label className="block text-sm font-medium">Price</label>
             <input
@@ -135,13 +114,15 @@ const ProductEditPage = () => {
               required
             />
           </div>
-    <div>
-  <label className="block text-sm font-medium">Images</label>
-  <ImageUploader images={images} setImages={setImages} />
-</div>
 
+          {/* Images */}
+          <div>
+            <label className="block text-sm font-medium">Images</label>
+            <ImageUploader images={images} setImages={setImages} />
+          </div>
 
-            <div>
+          {/* Stock Count */}
+          <div>
             <label className="block text-sm font-medium">Count in Stock</label>
             <input
               type="text"
@@ -152,6 +133,7 @@ const ProductEditPage = () => {
             />
           </div>
 
+          {/* Brand */}
           <div>
             <label className="block text-sm font-medium">Brand</label>
             <input
@@ -163,6 +145,7 @@ const ProductEditPage = () => {
             />
           </div>
 
+          {/* Category */}
           <div>
             <label className="block text-sm font-medium">Category</label>
             <input
@@ -174,6 +157,7 @@ const ProductEditPage = () => {
             />
           </div>
 
+          {/* Description */}
           <div>
             <label className="block text-sm font-medium">Description</label>
             <textarea
@@ -185,6 +169,7 @@ const ProductEditPage = () => {
             ></textarea>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loadingUpdate}
@@ -199,4 +184,3 @@ const ProductEditPage = () => {
 };
 
 export default ProductEditPage;
-

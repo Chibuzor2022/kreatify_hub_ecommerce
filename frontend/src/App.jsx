@@ -8,7 +8,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedAdminRoute from './routes/ProtectedAdminRoute';
 import ProductDetails from './pages/ProductDetails';
-import AdminDashboard from './pages/admin/AdminDashboard';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import 'swiper/css';
@@ -55,7 +54,6 @@ function App() {
         
             
             {/* Admin routes (protected) */}
-       <Route path="/admin/dashboard"  element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>}/>
        <Route path="/admin/userlist"  element={<ProtectedAdminRoute><UserListPage /></ProtectedAdminRoute>}/>
        <Route path="/admin/productlist"  element={<ProtectedAdminRoute><ProductListPage /></ProtectedAdminRoute>}/>
        <Route path="/admin/product/:id/edit"  element={<ProtectedAdminRoute><ProductEditPage /></ProtectedAdminRoute>}/>

@@ -1,11 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  @apply font-sans text-base text-gray-900;
+/* index.css */
+:root {
+  --primary-color: #3498db;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  @apply font-heading;
+body {
+  font-family: 'montserrat' sans-serif;
+  background-color: #f4f4f4;
+}
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loader {
+  animation: spin 1s linear infinite;
+  border-top-color: #3490dc;
 }

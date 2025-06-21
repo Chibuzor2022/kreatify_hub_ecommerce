@@ -1,4 +1,3 @@
-// components/PaystackPopup.js
 import React from 'react';
 import PaystackPop from '@paystack/inline-js';
 import axios from 'axios';
@@ -20,7 +19,6 @@ const PaystackPopup = ({ email, amount }) => {
         access_code,
         onSuccess: (response) => {
           console.log('Payment success:', response);
-          // Optionally verify transaction with backend here
         },
         onCancel: () => {
           console.log('Payment cancelled');

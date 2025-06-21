@@ -126,14 +126,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
-    //   deleteOrder: builder.mutation({
-    //   query: (id) => ({
-    //     url: `/orders/${id}`,
-    //     method: "DELETE",
-    //     credentials: "include",
-    //   }),
-    //   invalidatesTags: ["Order"],
-    // }),
+    //  Delete an order (Admin only)
+   
       deleteOrder: builder.mutation({
       query: (orderId) => ({
         url: `/orders/${orderId}`,

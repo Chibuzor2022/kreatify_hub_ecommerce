@@ -77,32 +77,6 @@ const loginUser = async (req, res) => {
 // @desc    Logout user / clear cookie
 // @route   POST /api/users/logout
 // @access  Public
-// const logoutUser = asyncHandler(async (req, res) => {
-// 	res.cookie("jwt", "", {
-// 		httpOnly: true,
-// 		expires: new Date(0),
-// 	});
-// 	res.status(200).json({ message: "Logged out successfully" });
-// });
-
-//  const logoutUser = () => async (dispatch) => {
-//   try {
-//     await axios.post(
-//       `${import.meta.env.VITE_API_URL}/users/logout`, // ensure correct full URL
-//       {},
-//       {
-//         withCredentials: true, // so cookies are included
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-//   } catch (error) {
-//     console.error('Logout error:', error?.response?.data?.message || error.message);
-//   }
-
-//   dispatch(logout());
-// };
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,
