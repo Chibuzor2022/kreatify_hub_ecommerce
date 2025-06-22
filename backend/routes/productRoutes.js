@@ -6,14 +6,12 @@ import {
   deleteProduct,
   createProduct,
   updateProduct,
-  // getMyOrders,
 } from '../controllers/productController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 // Static routes 
-// router.get('/myorders', protect, getMyOrders);
 router.get('/search', searchProducts);
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 
