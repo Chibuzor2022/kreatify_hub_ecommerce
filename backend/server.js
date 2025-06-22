@@ -7,7 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paystackRoutes from "./routes/paystackRoutes.js";
-import uploadRoutes from './routes/uploadRoute.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from 'path';
