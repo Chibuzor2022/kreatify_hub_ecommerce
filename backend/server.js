@@ -1,8 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-console.log('✅ CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
-
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
