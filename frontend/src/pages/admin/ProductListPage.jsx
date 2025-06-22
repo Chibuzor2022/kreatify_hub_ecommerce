@@ -220,9 +220,9 @@ const ProductListPage = () => {
 
   return (
     <>
-      <div className="p-6">
+      <div className="p-6 mt-14">
         {/* Header and create button */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">Products</h1>
           <button
             onClick={handleCreate}
