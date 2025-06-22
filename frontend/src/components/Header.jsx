@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { logout } from '../slices/authSlice';
 import { clearCart } from '../slices/cartSlice';
-import SearchBox from './SearchBox';
+
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import UserDropdown from './UserDropdown';

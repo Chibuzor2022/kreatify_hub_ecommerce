@@ -11,7 +11,7 @@ import paystackRoutes from "./routes/paystackRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import uploadRoutes from './routes/uploadRoute.js';
-
+import path from 'path';
 
 
 const router = express.Router();
@@ -51,6 +51,21 @@ app.use('/api/upload', uploadRoutes);
 app.get("/", (req, res) => {
 	res.send("API is running...");
 });
+
+const __dirname = path.resolve();
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running...');
+  });
+}
 
 // Start server
 const PORT = process.env.PORT || 5000;
