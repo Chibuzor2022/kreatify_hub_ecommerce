@@ -38,3 +38,8 @@ backend/.env
 
 # Uploads or temp
 backend/uploads/
+
+# vite
+.vite
+frontend/.vite
+
