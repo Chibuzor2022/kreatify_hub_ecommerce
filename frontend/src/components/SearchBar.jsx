@@ -1,9 +1,9 @@
-// 
+import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSearchProductsQuery } from '../slices/productApiSlice';
 
-const SearchBox = () => {
+const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
   const [debouncedKeyword, setDebouncedKeyword] = useState('');
   const navigate = useNavigate();
@@ -124,6 +124,6 @@ const SearchBox = () => {
       )}
     </div>
   );
-};
+}
 
-export default SearchBox ;
+export default SearchBar

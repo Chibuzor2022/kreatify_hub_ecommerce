@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { logout } from '../slices/authSlice';
 import { clearCart } from '../slices/cartSlice';
-
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import UserDropdown from './UserDropdown';
 import AdminDropdown from './AdminDropdown';
+import SearchBar from './SearchBar';
 import { motion, AnimatePresence } from 'framer-motion';
 void motion; // prevents unused import warning
 
@@ -64,7 +64,7 @@ const Header = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <SearchBox />
+            <SearchBar/>
 
             {/* Navigation links */}
             <Link
@@ -123,7 +123,7 @@ const Header = () => {
 
         {/* Mobile search box */}
         <div className="mt-3 md:hidden">
-          <SearchBox />
+          <SearchBar/>
         </div>
 
         {/* Mobile dropdown menu */}

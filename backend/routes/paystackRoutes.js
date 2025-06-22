@@ -2,7 +2,6 @@
 import express from "express";
 import axios from "axios";
 // import bodyParser from 'body-parser';
-// import { handlePaystackWebhook } from '../controllers/paystackController.js'
 
 const router = express.Router();
 
