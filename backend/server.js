@@ -18,7 +18,8 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173",
+  // origin: "http://localhost:5173",
+  origin: "https://kreatify-hub-ecommerce.vercel.app",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"],
