@@ -1,9 +1,9 @@
 // Import required hooks and utilities
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserProfile } from "../slices/authSlice"; // Redux action to update profile
-import { toast } from "react-toastify"; // Toast notifications
-import { useNavigate } from "react-router-dom"; // Navigation
+import { updateUserProfile } from "../slices/authSlice"; 
+import { toast } from "react-toastify"; 
+import { useNavigate } from "react-router-dom"; 
 
 export default function Profile() {
   const dispatch = useDispatch();

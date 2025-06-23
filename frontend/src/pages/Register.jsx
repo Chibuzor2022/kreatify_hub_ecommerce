@@ -1,8 +1,8 @@
 // Import necessary hooks and utilities
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../slices/authSlice"; // Redux async action to register user
-import { useNavigate, Link } from "react-router-dom"; // For navigation and linking
+import { registerUser } from "../slices/authSlice"; 
+import { useNavigate, Link } from "react-router-dom"; 
 
 // Functional component for user registration
 export default function Register() {
@@ -12,8 +12,8 @@ export default function Register() {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch(); // Hook to dispatch Redux actions
-  const navigate = useNavigate(); // Hook for navigation
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
 
   // Extract auth-related state from Redux store
   const { user, loading, error } = useSelector((state) => state.auth);

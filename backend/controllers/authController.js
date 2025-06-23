@@ -4,7 +4,6 @@ export const authUser = async (req, res) => {
   const { email, password } = req.body;
 
   // Look up the user in the database using the email provided
-  // Note: Ensure the model is correctly named (e.g., User instead of user)
   const user = await user.findOne({ email });
 
   // If a user with the provided email exists and the password matches
@@ -14,11 +13,11 @@ export const authUser = async (req, res) => {
     
     // Send a JSON response containing user data and the token
     res.json({
-      _id: user._id,        // User's unique ID
-      name: user.name,      // User's name
-      email: user.email,    // User's email
-      isAdmin: user.isAdmin,// Boolean indicating admin status
-      token,                // JWT token for authentication
+      _id: user._id,        
+      name: user.name,      
+      email: user.email,    
+      isAdmin: user.isAdmin,
+      token,                
     });
   } else {
     // If authentication fails, set status to 401 (Unauthorized)

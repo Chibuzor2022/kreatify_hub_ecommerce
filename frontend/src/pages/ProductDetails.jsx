@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Get the product ID from the URL
-import { useDispatch } from 'react-redux'; // To dispatch actions to Redux store
-import { addToCart } from '../slices/cartSlice'; // Action to add product to cart
-import ProductImageCarousel from '../components/ProductImageCarousel'; // Carousel component for product images
-import { toast } from 'react-toastify'; // For showing success messages
+import { useParams } from 'react-router-dom'; 
+import { useDispatch } from 'react-redux'; 
+import { addToCart } from '../slices/cartSlice'; 
+import ProductImageCarousel from '../components/ProductImageCarousel'; 
+import { toast } from 'react-toastify';
 
 function ProductDetails() {
   const { id } = useParams(); // Extract the product ID from the route

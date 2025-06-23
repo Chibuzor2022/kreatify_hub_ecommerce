@@ -1,10 +1,10 @@
 // Import required components from @headlessui/react for building accessible dropdown UI
 import {
-  Menu,         // Wrapper component for the dropdown menu
-  MenuButton,   // The button that toggles the dropdown
-  MenuItems,    // The container for dropdown options
-  MenuItem,     // A single clickable option inside the dropdown
-  Transition,   // Wrapper for animating the appearance/disappearance of menu
+  Menu,         
+  MenuButton,   
+  MenuItems,    
+  MenuItem,    
+  Transition,   
 } from '@headlessui/react';
 
 // Import Fragment for wrapping components without adding extra nodes to the DOM
@@ -32,12 +32,12 @@ const AdminDropdown = () => {
       {/* Transition adds enter/leave animations for the dropdown items */}
       <Transition
         as={Fragment}  // No extra wrapper in the DOM
-        enter="transition ease-out duration-200"           // Entry animation timing
-        enterFrom="transform opacity-0 scale-95"           // Initial state on enter
-        enterTo="transform opacity-100 scale-100"          // Final state on enter
-        leave="transition ease-in duration-150"            // Exit animation timing
-        leaveFrom="transform opacity-100 scale-100"        // Initial state on leave
-        leaveTo="transform opacity-0 scale-95"             // Final state on leave
+        enter="transition ease-out duration-200"           
+        enterFrom="transform opacity-0 scale-95"           
+        enterTo="transform opacity-100 scale-100"         
+        leave="transition ease-in duration-150"           
+        leaveFrom="transform opacity-100 scale-100"        
+        leaveTo="transform opacity-0 scale-95"             
       >
         {/* MenuItems is the dropdown content area */}
         <MenuItems className="absolute right-0 mt-1 w-18 h-24 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
