@@ -53,7 +53,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white shadow-md fixed top-0 left-0 w-full z-50 px-5">
+    <header className="bg-gray-900 text-white shadow-md fixed top-0 left-0 w-full z-50 px-6">
       <nav className="container mx-auto px-2 py-3">
         {/* Header Layout */}
         <div className="flex items-center justify-between">
