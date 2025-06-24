@@ -10,6 +10,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from 'path';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 // Connect DB
 connectDB();
@@ -18,8 +19,8 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  // origin: "https://kreatify-hub-ecommerce.vercel.app",
-  origin: "http://localhost:5173",
+  origin: "https://kreatify-hub-ecommerce.vercel.app",
+  // origin: "http://localhost:5173",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -34,6 +35,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/paystack", paystackRoutes);
 app.use("/api/upload", uploadRoutes);
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
 
 // Health check
 app.get("/", (req, res) => {
