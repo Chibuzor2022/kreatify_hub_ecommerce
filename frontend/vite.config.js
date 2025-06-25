@@ -10,11 +10,8 @@ export default defineConfig({
 		proxy: {
 			"/api": "http://localhost:5000", // forward requests to backend
 		},
-	},
- build: {
-    outDir: '../dist', // Temporary build directory
-    emptyOutDir: true
-  }
+	}
+
 });
 
 
