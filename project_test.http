@@ -24,3 +24,13 @@ GET {{baseUrl}}/products/{{productId}}
 
 ### 4. search product
 GET {{baseUrl}}/products/search?keyword=building
+
+  // "scripts": {
+  //   "test": "echo \"Error: no test specified\" && exit 1",
+  //   "start": "concurrently \"npm run server\" \"npm run client\"",
+  //   "server": "cd backend && npm run dev",
+  //   "build": "cd frontend && npm install && npm run build",
+  //   "client": "cd frontend && npm run dev"
+  // },
+
+  

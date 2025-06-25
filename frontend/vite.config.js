@@ -11,8 +11,9 @@ export default defineConfig({
 			"/api": "http://localhost:5000", // forward requests to backend
 		},
 	},
-	build: {
-    outDir: "dist",
-  },
+ build: {
+    outDir: '../dist', // Temporary build directory
+    emptyOutDir: true
+  }
 });
 
