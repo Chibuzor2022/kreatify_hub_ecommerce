@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice'; 
 import ProductImageCarousel from '../components/ProductImageCarousel'; 
 import { toast } from 'react-toastify';
+import axios from 'axios'; // Import axios for API requests
 
 function ProductDetails() {
   const { id } = useParams(); // Extract the product ID from the route
@@ -17,20 +18,34 @@ function ProductDetails() {
 
   // Fetch product data when the component mounts or `id` changes
   useEffect(() => {
+    // const fetchProduct = async () => {
+    //   try {
+    //     const response = await fetch(`/api/products/${id}`);
+    //     if (!response.ok) {
+    //       throw new Error('Failed to fetch product data');
+    //     }
+    //     const data = await response.json();
+    //     setProduct(data);
+    //   } catch (err) {
+    //     setError(err.message); // Save error message if fetch fails
+    //   } finally {
+    //     setLoading(false); // Always stop loading regardless of success/failure
+    //   }
+    // };
     const fetchProduct = async () => {
-      try {
-        const response = await fetch(`/api/products/${id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch product data');
-        }
-        const data = await response.json();
-        setProduct(data);
-      } catch (err) {
-        setError(err.message); // Save error message if fetch fails
-      } finally {
-        setLoading(false); // Always stop loading regardless of success/failure
-      }
-    };
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/products/${id}`,
+      { withCredentials: true } // ✅ needed for cookies
+    );
+    setProduct(response.data);
+  } catch (err) {
+    setError(err.response?.data?.message || 'Failed to fetch product data');
+  } finally {
+    setLoading(false);
+  }
+};
+    // Call the fetch function
 
     fetchProduct();
   }, [id]);
