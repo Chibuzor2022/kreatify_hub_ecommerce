@@ -66,7 +66,14 @@ function ProductDetails() {
 
   // Add product to cart and show success toast
   const handleAddToCart = () => {
-    dispatch(addToCart({ ...product, quantity: Number(quantity) }));
+    // dispatch(addToCart({ ...product, quantity: Number(quantity) }));
+    dispatch(addToCart({ 
+      
+        ...product,
+  image: product.images?.[0] || product.image,
+  quantity: Number(quantity)    
+    
+    }));
     toast.success(`${product.name} added to cart`);
   };
 

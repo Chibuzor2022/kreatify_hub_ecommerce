@@ -56,7 +56,7 @@ const OrderDetailsPage = () => {
             ) : (
               <div className="border rounded">
                 {order.orderItems.map((item) => (
-                  <div key={item._id} className="flex justify-between items-center border-b p-3">
+                   <div key={item._id} className="flex justify-between items-center border-b p-3">
                     <div className="flex items-center gap-4">
                       <img
                         src={item.image}
@@ -67,6 +67,7 @@ const OrderDetailsPage = () => {
                     </div>
                     <span>{item.quantity} × ₦{item.price} = ₦{(item.quantity * item.price).toLocaleString()}</span>
                   </div>
+                  
                 ))}
               </div>
             )}

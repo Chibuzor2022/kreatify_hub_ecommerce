@@ -20,7 +20,12 @@ const ProductCard = ({ product }) => {
     }
 
     // Add product to cart with quantity of 1
-    dispatch(addToCart({ ...product, quantity: 1 }));
+    // dispatch(addToCart({ ...product, quantity: 1 }));
+    dispatch(addToCart({ 
+     ...product,
+  image: product.images?.[0] || product.image, // <- explicitly send image
+  quantity: 1,
+    }));
     toast.success(`${product.name} added to cart`);
   };
 
