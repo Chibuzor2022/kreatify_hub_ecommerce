@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+  "postinstall": "npm install vite @vitejs/plugin-react --save-dev",
     "preview": "vite preview",
     "install-render": "npm install @vitejs/plugin-react --save-exact --no-audit --fund=false"
   },
