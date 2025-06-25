@@ -5,18 +5,13 @@
   "type": "module",
 
  "scripts": {
-    "install-all": "npm install --prefix backend && npm install --prefix frontend",
-    "build-frontend": "npm run build --prefix frontend",
-    "start": "node backend/server.js",
-    "render-build": "npm run install-all && npm run build-frontend && cp -a frontend/dist/. backend/public/",
-    
-    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
-    "dev:frontend": "npm run dev --prefix frontend",
-    "dev:backend": "npm run dev --prefix backend"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "build": "cd frontend && npm install && npm run build",
+    "client": "cd frontend && npm run dev"
   },
-  "engines": {
-    "node": "18.x"
-  },
+ 
 
   "keywords": [],
   "author": "",
