@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const UserDropdown = ({ name, onLogout }) => {
   return (
     // Wrapper for the dropdown menu
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left ">
       {/* Button that triggers the dropdown */}
       <MenuButton className="flex items-center gap-2 text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded">
         <FaUser />
