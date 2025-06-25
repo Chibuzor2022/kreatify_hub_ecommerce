@@ -10,7 +10,8 @@ const ImageUploader = ({ images = [], setImages }) => {
     acceptedFiles.forEach((file) => formData.append('images', file)); // match multer field name
 
     try {
-      const { data } = await axios.post('/api/upload', formData, {
+      // const { data } = await axios.post('/api/upload', formData, {
+      const{data}=await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true, // send cookies with request
       });
