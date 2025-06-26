@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && nodemon server.js",
     "client": "cd frontend && vite",
-    "build": "cd frontend && npm install && chmod +x node_modules/.bin/vite && npm run build",
+    "build": "cd frontend && npm install && npm run build",
     "start": "cd backend && node server.js",
     "postinstall": "chmod +x frontend/node_modules/.bin/vite"
   },
