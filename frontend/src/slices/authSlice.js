@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { clearCart } from '../slices/cartSlice';
+import { apiSlice } from './apiSlice'
 
 // Async thunk for registering a new user
 export const registerUser = createAsyncThunk(
@@ -126,6 +128,8 @@ export const logoutUser = () => async (dispatch) => {
     console.error('Logout error:', error);
   }
   dispatch(logout());
+  dispatch(clearCart());          // clears cart
+  dispatch(apiSlice.util.resetApiState()); // clears RTK Query cache
 };
 
 export const { logout } = authSlice.actions;
