@@ -61,9 +61,10 @@ const PlaceOrderPage = () => {
           totalPrice,
         },
         {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
+          // headers: {
+          //   Authorization: `Bearer ${user.token}`,
+          // },
+          withCredentials: true, // Ensure cookies are sent for session management
         }
       );
 
@@ -79,13 +80,23 @@ const PlaceOrderPage = () => {
       );
 
       // 3. Save the payment reference to backend for tracking
+      // await axios.put(
+      //   `${import.meta.env.VITE_API_URL}/orders/${createdOrder._id}/payment`,
+      //   { reference: paymentData.reference },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${user.token}`,
+      //     },
+      //   }
+      // );
+
+
       await axios.put(
         `${import.meta.env.VITE_API_URL}/orders/${createdOrder._id}/payment`,
         { reference: paymentData.reference },
         {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
+          withCredentials: true,
+        
         }
       );
 
